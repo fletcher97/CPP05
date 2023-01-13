@@ -1,10 +1,10 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::GardeTooLowException::GardeTooLowException(std::string msg) : std::invalid_argument(msg)
+Form::GardeTooLowException::GardeTooLowException(std::string msg) : std::range_error(msg)
 {}
 
-Form::GardeTooHighException::GardeTooHighException(std::string msg) : std::invalid_argument(msg)
+Form::GardeTooHighException::GardeTooHighException(std::string msg) : std::range_error(msg)
 {}
 
 Form::Form() : _name("Invalid"), _gradeSign(0), _gradeExec(0), _signed(false)
