@@ -23,7 +23,6 @@ SCF::_execute(const Bureaucrat& bureaucrat) const
 {
 	(void) bureaucrat;
 	std::ofstream file;
-	// + "_shrubbery"
 	file.open((this->_target + "_shrubbery").c_str());
 	file <<
 "                                                         .\n\
