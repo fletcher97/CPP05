@@ -3,10 +3,10 @@
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::GardeTooLowException::GardeTooLowException(std::string msg) : std::invalid_argument(msg)
+Bureaucrat::GardeTooLowException::GardeTooLowException(std::string msg) : std::range_error(msg)
 {}
 
-Bureaucrat::GardeTooHighException::GardeTooHighException(std::string msg) : std::invalid_argument(msg)
+Bureaucrat::GardeTooHighException::GardeTooHighException(std::string msg) : std::range_error(msg)
 {}
 
 

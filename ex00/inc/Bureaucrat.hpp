@@ -16,13 +16,13 @@ private:
 	int _grade;
 public:
 
-	class GardeTooLowException : public std::invalid_argument
+	class GardeTooLowException : public std::range_error
 	{
 	public:
 		GardeTooLowException(std::string msg);
 	};
 
-	class GardeTooHighException : public std::invalid_argument
+	class GardeTooHighException : public std::range_error
 	{
 	public:
 		GardeTooHighException(std::string msg);
