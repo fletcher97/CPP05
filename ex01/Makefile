@@ -3,8 +3,20 @@
 ################################################################################
 
 # Makefile by fletcher97
-# Version: 2.4
+# Version: 3.1
 # Repo: www.github.com/fletcher97/utils
+
+# v3.1: Added debug coverage rules and fixed minor bugs. This Makefile can now
+# compile binaries to produce coverage profile files in order to be used with
+# gcov. Intermediary files are placed in the OBJ folder. After executing the
+# programyou you can run gcov to generate the coverage reports. Alteratively the
+# target cov can be used to do that. All generated files will be moved to a gcov
+# folder.
+
+# v3.0: Added support for multilanguage. Out of the box it accepts C and C++.
+# It is possible to specify the compiler family to be used (LLVM for
+# clang/clang++ and GNU for gcc/g++). Other compilers/languages can easily be
+# added assuming the compilation process is similar to C.
 
 # v2.4: Added PEDANTIC variable on configs section. If set to true a lot of
 # warning flags will be added to use while compiling. By default this feature is
@@ -76,15 +88,30 @@ PEDANTIC := true
 # activated/deactivated based on the language used.
 LANG := C++
 
+# Specify the compiler to use. In conjuntion with the language it can pick the
+# right compiler and the right version of the compiler (i.e. gcc vs g++).
+# Supported option: LLVM, GNU
+COMPILER=LLVM
+
 ################################################################################
 # Compiler & Flags
 ################################################################################
 
 # Compiler
 ifeq (${LANG},C)
-	CC := clang
-else
-	CC := clang++
+	ifeq (${COMPILER},LLVM)
+		CC := clang
+	endif
+	ifeq (${COMPILER},GNU)
+		CC := gcc
+	endif
+else ifeq (${LANG},C++)
+	ifeq (${COMPILER},LLVM)
+		CC := clang++
+	endif
+	ifeq (${COMPILER},GNU)
+		CC := g++
+	endif
 endif
 
 # Compiler flags
@@ -99,15 +126,16 @@ ifeq (${PEDANTIC},true)
 	CFLAGS += -Wcast-qual -Wdisabled-optimization -Wformat=2 -Wuninitialized
 	CFLAGS += -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow
 	CFLAGS += -Wstrict-overflow=5 -Wundef -fdiagnostics-show-option
-	CFLAGS += -fstack-protector-all -fstack-clash-protection
-	ifeq (${CC},gcc)
-		CFLAGS += -Wformat-signedness -Wformat-truncation=2 -Wformat-overflow=2
-		CFLAGS += -Wlogical-op -Wstringop-overflow=4
+	CFLAGS += -fstack-protector-all
+	ifeq (${COMPILER},GNU)
+		CFLAGS += -fstack-clash-protection -Wformat-signedness
+		CFLAGS += -Wformat-truncation=2 -Wformat-overflow=2 -Wlogical-op
+		CFLAGS += -Wstringop-overflow=4
 	endif
 	ifeq (${LANG},C++)
 		CFLAGS += -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual
 		CFLAGS += -Wsign-promo
-		ifeq (${CC},gcc)
+		ifeq (${COMPILER},GNU)
 			CFLAGS += -Wstrict-null-sentinel -Wnoexcept
 		endif
 	endif
@@ -115,6 +143,9 @@ endif
 
 # Generic debug flags
 DFLAGS := -g
+
+# Coverage flags
+COVFLAGS = -fprofile-arcs -ftest-coverage
 
 # Address sanitizing flags
 ASAN := -fsanitize=address -fsanitize-recover=address
@@ -139,6 +170,7 @@ INC_ROOT := inc/
 LIB_ROOT := lib/
 OBJ_ROOT := obj/
 SRC_ROOT := src/
+COV_ROOT := cov/
 
 ################################################################################
 # Libraries
@@ -281,11 +313,13 @@ clean: $$(call get_lib_target,$${DEFAULT_LIBS},$$@)
 	${AT}printf "\033[38;5;1m[REMOVING OBJECTS]\033[0m\n" ${BLOCK}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
 	${AT}find ${OBJ_ROOT} -type f -name "*.o" -delete ${BLOCK}
+	${AT}printf "\033[38;5;1m[REMOVING COVERAGE]\033[0m\n" ${BLOCK}
+	${AT}find ${OBJ_ROOT} -type f\
+		-name "*.gcda" -delete -o -name "*.gcno" -delete ${BLOCK}
+	${AT}mkdir -p ${COV_ROOT} ${BLOCK}
+	${AT}find ${COV_ROOT} -type f -name "*.gcov" -delete ${BLOCK}
 
-fclean: $$(call get_lib_target,$${DEFAULT_LIBS},$$@)
-	${AT}printf "\033[38;5;1m[REMOVING OBJECTS]\033[0m\n" ${BLOCK}
-	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
-	${AT}find ${OBJ_ROOT} -type f -name "*.o" -delete ${BLOCK}
+fclean: $$(call get_lib_target,$${DEFAULT_LIBS},$$@) clean
 	${AT}printf "\033[38;5;1m[REMOVING BINARIES]\033[0m\n" ${BLOCK}
 	${AT}mkdir -p ${BIN_ROOT} ${BLOCK}
 	${AT}find ${BIN_ROOT} -type f\
@@ -307,6 +341,14 @@ re: fclean all
 debug: CFLAGS += ${DFLAGS}
 debug: $$(call get_lib_target,$${DEFAULT_LIBS},$$@) all
 
+debug_cov: CFLAGS += ${COVFLAGS}
+debug_cov: $$(call get_lib_target,$${DEFAULT_LIBS},$$@) all
+
+cov: debug_cov
+	${AT}mkdir -p ${COV_ROOT} ${BLOCK}
+	${AT}gcov -arHs src obj/*.gc* ${BLOCK}
+	${AT}mv *.gcov ${COV_ROOT} ${BLOCK}
+
 obj/asan/asan.o: src/asan/asan.c
 	${AT}mkdir -p ${@D} ${BLOCK}
 	${AT}${CC} -o $@ -c $< ${BLOCK}
@@ -322,6 +364,8 @@ debug_msan: CFLAGS += ${DFLAGS} ${MSAN}
 debug_msan: $$(call get_lib_target,$${DEFAULT_LIBS},$$@) all
 
 debug_re: fclean debug
+
+debug_cov_re: fclean debug_cov
 
 debug_asan_re: fclean debug_asan
 
@@ -340,9 +384,11 @@ debug_msan_re: fclean debug_msan
 	${AT}mkdir -p ${INC_ROOT} ${BLOCK}
 	${AT}mkdir -p ${OBJ_ROOT} ${BLOCK}
 	${AT}mkdir -p ${SRC_ROOT} ${BLOCK}
+	${AT}mkdir -p ${COV_ROOT} ${BLOCK}
 	${AT}printf "\033[33m[INITIALIZING GIT REPOSITORY]\033[0m\n" ${BLOCK}
 	${AT}git init ${BLOCK}
-	${AT}echo "*.o\n*.d\n.vscode\na.out\n.DS_Store\nbin/\n*.ignore"\
+	${AT}echo -en ".DS_Store\na.out\n*.o"\
+		"\n*.gcda\n*.gcno\n*.gcov\n*.d\n*.ignore\n.vscode/\nbin/"\
 		> .gitignore ${BLOCK}
 	${AT}date > $@ ${BLOCK}
 	${AT}printf "\033[33m[CREATING FIRST COMMIT]\033[0m\n" ${BLOCK}
@@ -376,6 +422,9 @@ compile-test: ${addprefix compile-test/,${NAMES}}
 
 # Phony debug targets
 .PHONY: debug debug_re debug_asan debug_asan_re debug_tsan debug_tsan_re
+
+# Phony cov targets
+.PHONY: debug_cov debug_cov_re cov
 
 # Phony utility targets
 .PHONY: targets .FORCE compile-test
@@ -460,7 +509,8 @@ $(call make_bin_def,$(notdir ${bin}),${bin})))
 endif
 
 $(foreach src,${SRCS},$(eval\
-$(call make_dep_def,$(subst ${SRC_ROOT},${DEP_ROOT},${src:.${SRC_FILE_EXT}=.d}),${src})))
+$(call make_dep_def,$(subst ${SRC_ROOT},${DEP_ROOT},\
+${src:.${SRC_FILE_EXT}=.d}),${src})))
 
 $(foreach src,${SRCS},$(eval\
 $(call make_obj_def,$(subst ${SRC_ROOT},${OBJ_ROOT},\
