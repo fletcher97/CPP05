@@ -1,11 +1,11 @@
 #if !defined(PRESIDENTIAL_PARDON_FORM_HPP)
 #define PRESIDENTIAL_PARDON_FORM_HPP
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define PPF PresidentialPardonForm
 
-class PPF : public Form
+class PPF : public AForm
 {
 private:
 	const std::string _target;

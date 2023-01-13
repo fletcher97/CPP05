@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -63,7 +63,7 @@ tesBureaucrat()
 }
 
 void
-testForm(Form& f)
+testForm(AForm& f)
 {
 	Bureaucrat b1("John_5", 5);
 	Bureaucrat b2("John_6", 6);

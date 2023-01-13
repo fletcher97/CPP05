@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::GardeTooLowException::GardeTooLowException(std::string msg) : std::invalid_argument(msg)
 {}
@@ -62,7 +62,7 @@ Bureaucrat::demote() throw (GardeTooLowException)
 }
 
 void
-Bureaucrat::signForm(Form& form) const
+Bureaucrat::signForm(AForm& form) const
 {
 	if (form.isSigned())
 	{
@@ -74,14 +74,14 @@ Bureaucrat::signForm(Form& form) const
 		form.beSigned(*this);
 		std::cout << *this << " signed " << form << std::endl;
 	}
-	catch(Form::GardeTooLowException& e)
+	catch(AForm::GardeTooLowException& e)
 	{
 		std::cout << *this << ", couldn't sign " << form << " because " << e.what() << std::endl;
 	}
 }
 
 void
-Bureaucrat::executeForm(const Form& form) const
+Bureaucrat::executeForm(const AForm& form) const
 {
 	try
 	{
