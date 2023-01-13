@@ -1,5 +1,5 @@
-#if !defined(FORM_HPP)
-#define FORM_HPP
+#if !defined(AFORM_HPP)
+#define AFORM_HPP
 
 #include <string>
 #include <stdexcept>
@@ -16,7 +16,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 private:
 	const std::string _name;
@@ -25,7 +25,7 @@ private:
 	bool _signed;
 
 protected:
-	Form();
+	AForm();
 	virtual void _execute(const Bureaucrat& executor) const = 0;
 public:
 
@@ -47,10 +47,10 @@ public:
 		NotSignedException(std::string msg);
 	};
 
-	Form(std::string name, int gradeSign, int gradeExec) throw (GardeTooHighException, GardeTooLowException);
-	Form(const Form& other);
-	Form& operator=(const Form& other);
-	virtual ~Form();
+	AForm(std::string name, int gradeSign, int gradeExec) throw (GardeTooHighException, GardeTooLowException);
+	AForm(const AForm& other);
+	AForm& operator=(const AForm& other);
+	virtual ~AForm();
 
 	void execute(const Bureaucrat& executor) const throw (GardeTooLowException, NotSignedException);
 
@@ -62,6 +62,6 @@ public:
 	void beSigned(const Bureaucrat& bureaucrat) throw(GardeTooLowException);
 
 };
-std::ostream& operator<<(std::ostream& out, const Form& form);
+std::ostream& operator<<(std::ostream& out, const AForm& form);
 
-#endif // FORM_HPP
+#endif // AFORM_HPP
