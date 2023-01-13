@@ -1,13 +1,13 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-AForm::GardeTooLowException::GardeTooLowException(std::string msg) : std::invalid_argument(msg)
+AForm::GardeTooLowException::GardeTooLowException(std::string msg) : std::range_error(msg)
 {}
 
-AForm::GardeTooHighException::GardeTooHighException(std::string msg) : std::invalid_argument(msg)
+AForm::GardeTooHighException::GardeTooHighException(std::string msg) : std::range_error(msg)
 {}
 
-AForm::NotSignedException::NotSignedException(std::string msg) : std::invalid_argument(msg)
+AForm::NotSignedException::NotSignedException(std::string msg) : std::runtime_error(msg)
 {}
 
 AForm::AForm() : _name("Invalid"), _gradeSign(0), _gradeExec(0), _signed(false)
