@@ -45,11 +45,6 @@ int main()
 	try
 	{
 		Bureaucrat a("Smit", 1000);
-		while (42)
-		{
-			a.promote();
-			std::cout << a << std::endl;
-		}
 	}
 	catch(const std::exception& e)
 	{
