@@ -27,19 +27,19 @@ private:
 	Form();
 public:
 
-	class GardeTooLowException : public std::range_error
+	class GradeTooLowException : public std::range_error
 	{
 	public:
-		GardeTooLowException(std::string msg);
+		GradeTooLowException(std::string msg);
 	};
 
-	class GardeTooHighException : public std::range_error
+	class GradeTooHighException : public std::range_error
 	{
 	public:
-		GardeTooHighException(std::string msg);
+		GradeTooHighException(std::string msg);
 	};
 
-	Form(std::string name, int gradeSign, int gradeExec) throw (GardeTooHighException, GardeTooLowException);
+	Form(std::string name, int gradeSign, int gradeExec) throw (GradeTooHighException, GradeTooLowException);
 	Form(const Form& other);
 	Form& operator=(const Form& other);
 	~Form();
@@ -49,7 +49,7 @@ public:
 	int getGradeExec() const;
 	bool isSigned() const;
 
-	void beSigned(const Bureaucrat& bureaucrat) throw(GardeTooLowException);
+	void beSigned(const Bureaucrat& bureaucrat) throw(GradeTooLowException);
 
 };
 std::ostream& operator<<(std::ostream& out, const Form& form);

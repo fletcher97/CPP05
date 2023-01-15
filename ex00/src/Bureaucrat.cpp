@@ -3,19 +3,19 @@
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::GardeTooLowException::GardeTooLowException(std::string msg) : std::range_error(msg)
+Bureaucrat::GradeTooLowException::GradeTooLowException(std::string msg) : std::range_error(msg)
 {}
 
-Bureaucrat::GardeTooHighException::GardeTooHighException(std::string msg) : std::range_error(msg)
+Bureaucrat::GradeTooHighException::GradeTooHighException(std::string msg) : std::range_error(msg)
 {}
 
 
-Bureaucrat::Bureaucrat(std::string name, int grade) throw (GardeTooHighException, GardeTooLowException) : _name(name)
+Bureaucrat::Bureaucrat(std::string name, int grade) throw (GradeTooHighException, GradeTooLowException) : _name(name)
 {
 	if (grade > 150)
-		throw GardeTooLowException("Can't create bureaucrat with a grade worst than 150. Grade: " + ITOS(grade));
+		throw GradeTooLowException("Can't create bureaucrat with a grade worst than 150. Grade: " + ITOS(grade));
 	if (grade < 1)
-		throw GardeTooHighException("Can't create bureaucrat with a grade better than 1. Grade: " + ITOS(grade));
+		throw GradeTooHighException("Can't create bureaucrat with a grade better than 1. Grade: " + ITOS(grade));
 	this->_grade = grade;
 }
 
@@ -45,18 +45,18 @@ Bureaucrat::getName() const
 }
 
 void
-Bureaucrat::promote() throw (GardeTooHighException)
+Bureaucrat::promote() throw (GradeTooHighException)
 {
 	if (this->_grade <= 1)
-		throw GardeTooHighException("Grade is already max. Can't promote any higher.");
+		throw GradeTooHighException("Grade is already max. Can't promote any higher.");
 	this->_grade--;
 }
 
 void
-Bureaucrat::demote() throw (GardeTooLowException)
+Bureaucrat::demote() throw (GradeTooLowException)
 {
 	if (this->_grade >= 150)
-		throw GardeTooLowException("Grade is already min. Can't demote any lower.");
+		throw GradeTooLowException("Grade is already min. Can't demote any lower.");
 	this->_grade++;
 }
 

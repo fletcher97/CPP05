@@ -29,16 +29,16 @@ protected:
 	virtual void _execute(const Bureaucrat& executor) const = 0;
 public:
 
-	class GardeTooLowException : public std::range_error
+	class GradeTooLowException : public std::range_error
 	{
 	public:
-		GardeTooLowException(std::string msg);
+		GradeTooLowException(std::string msg);
 	};
 
-	class GardeTooHighException : public std::range_error
+	class GradeTooHighException : public std::range_error
 	{
 	public:
-		GardeTooHighException(std::string msg);
+		GradeTooHighException(std::string msg);
 	};
 
 	class NotSignedException : public std::runtime_error
@@ -47,19 +47,19 @@ public:
 		NotSignedException(std::string msg);
 	};
 
-	AForm(std::string name, int gradeSign, int gradeExec) throw (GardeTooHighException, GardeTooLowException);
+	AForm(std::string name, int gradeSign, int gradeExec) throw (GradeTooHighException, GradeTooLowException);
 	AForm(const AForm& other);
 	AForm& operator=(const AForm& other);
 	virtual ~AForm();
 
-	void execute(const Bureaucrat& executor) const throw (GardeTooLowException, NotSignedException);
+	void execute(const Bureaucrat& executor) const throw (GradeTooLowException, NotSignedException);
 
 	const std::string getName() const;
 	int getGradeSign() const;
 	int getGradeExec() const;
 	bool isSigned() const;
 
-	void beSigned(const Bureaucrat& bureaucrat) throw(GardeTooLowException);
+	void beSigned(const Bureaucrat& bureaucrat) throw(GradeTooLowException);
 
 };
 std::ostream& operator<<(std::ostream& out, const AForm& form);

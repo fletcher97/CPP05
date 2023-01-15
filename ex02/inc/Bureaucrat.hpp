@@ -22,19 +22,19 @@ private:
 	int _grade;
 public:
 
-	class GardeTooLowException : public std::invalid_argument
+	class GradeTooLowException : public std::invalid_argument
 	{
 	public:
-		GardeTooLowException(std::string msg);
+		GradeTooLowException(std::string msg);
 	};
 
-	class GardeTooHighException : public std::invalid_argument
+	class GradeTooHighException : public std::invalid_argument
 	{
 	public:
-		GardeTooHighException(std::string msg);
+		GradeTooHighException(std::string msg);
 	};
 
-	Bureaucrat(std::string name, int grade) throw (GardeTooHighException, GardeTooLowException);
+	Bureaucrat(std::string name, int grade) throw (GradeTooHighException, GradeTooLowException);
 	Bureaucrat(const Bureaucrat& other);
 	Bureaucrat& operator=(const Bureaucrat& other);
 	~Bureaucrat();
@@ -42,8 +42,8 @@ public:
 	int getGrade() const;
 	const std::string getName() const;
 
-	void promote() throw (GardeTooHighException);
-	void demote() throw (GardeTooLowException);
+	void promote() throw (GradeTooHighException);
+	void demote() throw (GradeTooLowException);
 
 	void signForm(AForm& form) const;
 	void executeForm(const AForm& form) const;

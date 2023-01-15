@@ -16,19 +16,19 @@ private:
 	int _grade;
 public:
 
-	class GardeTooLowException : public std::range_error
+	class GradeTooLowException : public std::range_error
 	{
 	public:
-		GardeTooLowException(std::string msg);
+		GradeTooLowException(std::string msg);
 	};
 
-	class GardeTooHighException : public std::range_error
+	class GradeTooHighException : public std::range_error
 	{
 	public:
-		GardeTooHighException(std::string msg);
+		GradeTooHighException(std::string msg);
 	};
 
-	Bureaucrat(std::string name, int grade) throw (GardeTooHighException, GardeTooLowException);
+	Bureaucrat(std::string name, int grade) throw (GradeTooHighException, GradeTooLowException);
 	Bureaucrat(const Bureaucrat& other);
 	Bureaucrat& operator=(const Bureaucrat& other);
 	~Bureaucrat();
@@ -36,8 +36,8 @@ public:
 	int getGrade() const;
 	const std::string getName() const;
 
-	void promote() throw (GardeTooHighException);
-	void demote() throw (GardeTooLowException);
+	void promote() throw (GradeTooHighException);
+	void demote() throw (GradeTooLowException);
 };
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat);
 
