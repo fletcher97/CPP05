@@ -81,4 +81,8 @@ Intern::makeForm(const std::string form, const std::string target) const
 	return f;
 }
 
-std::ostream& operator<<(std::ostream& out, const Intern& form);
+std::ostream& operator<<(std::ostream& out, const Intern& form) {
+	(void)form;
+	out << "intern";
+	return out;
+}
