@@ -55,7 +55,6 @@ SCF::_execute(const Bureaucrat& bureaucrat) const
                           ...;%@@@@@%%:;;;;,..    Gilo97\n";
 	file.flush();
 	file.close();
-	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, const SCF& form)
