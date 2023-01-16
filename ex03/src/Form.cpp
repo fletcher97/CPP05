@@ -1,13 +1,13 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::GradeTooLowException::GradeTooLowException(std::string msg) : std::invalid_argument(msg)
+Form::GradeTooLowException::GradeTooLowException(std::string msg) : std::range_error(msg)
 {}
 
-Form::GradeTooHighException::GradeTooHighException(std::string msg) : std::invalid_argument(msg)
+Form::GradeTooHighException::GradeTooHighException(std::string msg) : std::range_error(msg)
 {}
 
-Form::NotSignedException::NotSignedException(std::string msg) : std::invalid_argument(msg)
+Form::NotSignedException::NotSignedException(std::string msg) : std::runtime_error(msg)
 {}
 
 Form::Form() : _name("Invalid"), _gradeSign(0), _gradeExec(0), _signed(false)

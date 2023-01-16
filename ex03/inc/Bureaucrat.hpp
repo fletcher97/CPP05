@@ -22,13 +22,13 @@ private:
 	int _grade;
 public:
 
-	class GradeTooLowException : public std::invalid_argument
+	class GradeTooLowException : public std::range_error
 	{
 	public:
 		GradeTooLowException(std::string msg);
 	};
 
-	class GradeTooHighException : public std::invalid_argument
+	class GradeTooHighException : public std::range_error
 	{
 	public:
 		GradeTooHighException(std::string msg);

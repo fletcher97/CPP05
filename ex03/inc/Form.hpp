@@ -29,19 +29,19 @@ protected:
 	virtual void _execute(const Bureaucrat& executor) const = 0;
 public:
 
-	class GradeTooLowException : public std::invalid_argument
+	class GradeTooLowException : public std::range_error
 	{
 	public:
 		GradeTooLowException(std::string msg);
 	};
 
-	class GradeTooHighException : public std::invalid_argument
+	class GradeTooHighException : public std::range_error
 	{
 	public:
 		GradeTooHighException(std::string msg);
 	};
 
-	class NotSignedException : public std::invalid_argument
+	class NotSignedException : public std::runtime_error
 	{
 	public:
 		NotSignedException(std::string msg);

@@ -4,10 +4,10 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Bureaucrat::GradeTooLowException::GradeTooLowException(std::string msg) : std::invalid_argument(msg)
+Bureaucrat::GradeTooLowException::GradeTooLowException(std::string msg) : std::range_error(msg)
 {}
 
-Bureaucrat::GradeTooHighException::GradeTooHighException(std::string msg) : std::invalid_argument(msg)
+Bureaucrat::GradeTooHighException::GradeTooHighException(std::string msg) : std::range_error(msg)
 {}
 
 
