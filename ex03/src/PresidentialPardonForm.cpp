@@ -2,10 +2,10 @@
 
 #include "PresidentialPardonForm.hpp"
 
-PPF::PPF(std::string target) : Form("PPF_" + target, 25, 5), _target(target)
+PPF::PPF(std::string target) : AForm("PPF_" + target, 25, 5), _target(target)
 {}
 
-PPF::PPF(const PPF& other) : Form(other), _target(other.getTarget())
+PPF::PPF(const PPF& other) : AForm(other), _target(other.getTarget())
 {}
 
 PPF::~PPF()

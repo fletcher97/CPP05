@@ -4,12 +4,12 @@
 
 #include "RobotomyRequestForm.hpp"
 
-RRF::RRF(std::string target) : Form("RRF_" + target, 72, 45), _target(target)
+RRF::RRF(std::string target) : AForm("RRF_" + target, 72, 45), _target(target)
 {
 	std::srand(std::time(NULL));
 }
 
-RRF::RRF(const RRF& other) : Form(other), _target(other.getTarget())
+RRF::RRF(const RRF& other) : AForm(other), _target(other.getTarget())
 {}
 
 RRF::~RRF()

@@ -64,7 +64,7 @@ tesBureaucrat()
 }
 
 void
-testForm(Form& f)
+testForm(AForm& f)
 {
 	Bureaucrat b1("John_5", 5);
 	Bureaucrat b2("John_6", 6);
@@ -146,10 +146,10 @@ testForm(Form& f)
 void testMake(std::string form, std::string target)
 {
 	std::cout << std::endl;
-	Form* f = Intern().makeForm(form, target);
+	AForm* f = Intern().makeForm(form, target);
 	if (f)
 	{
-		testForm(dynamic_cast<Form&>(*f));
+		testForm(dynamic_cast<AForm&>(*f));
 		delete f;
 	}
 	std::cout << std::endl;

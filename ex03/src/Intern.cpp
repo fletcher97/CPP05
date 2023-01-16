@@ -48,10 +48,10 @@ Intern::_makePPF(const std::string form, const std::string target) const
 }
 
 
-Form*
+AForm*
 Intern::makeForm(const std::string form, const std::string target) const
 {
-	Form *f = NULL;
+	AForm *f = NULL;
 	try
 	{
 		f = this->_makeSCF(form, target);

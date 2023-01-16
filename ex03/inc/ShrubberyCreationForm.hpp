@@ -1,11 +1,11 @@
 #if !defined(SHRUBBERY_CREATION_FORM_HPP)
 #define SHRUBBERY_CREATION_FORM_HPP
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define SCF ShruberryCreationForm
 
-class SCF : public Form
+class SCF : public AForm
 {
 private:
 	const std::string _target;

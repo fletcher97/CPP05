@@ -3,10 +3,10 @@
 
 #include "ShrubberyCreationForm.hpp"
 
-SCF::SCF(std::string target) : Form("SCF_" + target, 145, 137), _target(target)
+SCF::SCF(std::string target) : AForm("SCF_" + target, 145, 137), _target(target)
 {}
 
-SCF::SCF(const SCF& other) : Form(other), _target(other.getTarget())
+SCF::SCF(const SCF& other) : AForm(other), _target(other.getTarget())
 {}
 
 SCF::~SCF()

@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -28,7 +28,7 @@ public:
 	Intern& operator=(const Intern& other);
 	~Intern();
 
-	Form *makeForm(const std::string form, const std::string target) const;
+	AForm *makeForm(const std::string form, const std::string target) const;
 };
 std::ostream& operator<<(std::ostream& out, const Intern& form);
 

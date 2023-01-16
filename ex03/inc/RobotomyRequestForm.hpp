@@ -1,11 +1,11 @@
 #if !defined(ROBOTOMY_REQUEST_FORM_HPP)
 #define ROBOTOMY_REQUEST_FORM_HPP
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define RRF RobotomyRequestForm
 
-class RRF : public Form
+class RRF : public AForm
 {
 private:
 	const std::string _target;

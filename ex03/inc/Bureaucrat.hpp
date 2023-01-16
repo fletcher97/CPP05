@@ -13,7 +13,7 @@
 
 #endif // ITOS(x)
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -45,8 +45,8 @@ public:
 	void promote() throw (GradeTooHighException);
 	void demote() throw (GradeTooLowException);
 
-	void signForm(Form& form) const;
-	void executeForm(const Form& form) const;
+	void signForm(AForm& form) const;
+	void executeForm(const AForm& form) const;
 };
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat);
 
