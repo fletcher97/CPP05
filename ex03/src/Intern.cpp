@@ -55,26 +55,29 @@ Intern::makeForm(const std::string form, const std::string target) const
 	try
 	{
 		f = this->_makeSCF(form, target);
+		std::cout << "Form " << form << " created" << std::endl;
+		return f;
 	}
 	catch(const std::exception& e)
 	{}
 	try
 	{
 		f =  this->_makeRRF(form, target);
+		std::cout << "Form " << form << " created" << std::endl;
+		return f;
 	}
 	catch(const std::exception& e)
 	{}
 	try
 	{
 		f =  this->_makePPF(form, target);
+		std::cout << "Form " << form << " created" << std::endl;
+		return f;
 	}
 	catch(const std::exception& e)
 	{}
 
-	if (f)
-		std::cout << "Form " << form << " created" << std::endl;
-	else
-		std::cout << "Form " << form << " is not a known form" << std::endl;
+	std::cout << "Form " << form << " is not a known form" << std::endl;
 	return f;
 }
 
