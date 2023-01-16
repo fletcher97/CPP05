@@ -29,6 +29,13 @@ RRF::_execute(const Bureaucrat& bureaucrat) const
 	std::cout << "The robotomy for " << this->_target << " was a " << (std::rand() % 2 ? "success." : "failure.") << std::endl;
 }
 
+RRF&
+RRF::operator=(const RRF& other)
+{
+	AForm::operator=(other);
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& out, const RRF& form)
 {
 	out << "\"" << form.getName();

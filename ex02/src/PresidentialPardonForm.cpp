@@ -8,6 +8,13 @@ PPF::PPF(std::string target) : AForm("PPF_" + target, 25, 5), _target(target)
 PPF::PPF(const PPF& other) : AForm(other), _target(other.getTarget())
 {}
 
+PPF&
+PPF::operator=(const PPF& other)
+{
+	AForm::operator=(other);
+	return *this;
+}
+
 PPF::~PPF()
 {}
 

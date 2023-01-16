@@ -14,6 +14,7 @@ protected:
 public:
 	PPF(std::string target);
 	PPF(const PPF& other);
+	PPF& operator=(const PPF& other);
 	~PPF();
 
 	std::string getTarget() const;

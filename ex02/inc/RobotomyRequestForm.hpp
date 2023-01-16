@@ -14,6 +14,7 @@ protected:
 public:
 	RRF(std::string target);
 	RRF(const RRF& other);
+	RRF& RRF::operator=(const RRF& other);
 	~RRF();
 
 	std::string getTarget() const;

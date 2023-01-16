@@ -14,6 +14,7 @@ protected:
 public:
 	SCF(std::string target);
 	SCF(const SCF& other);
+	SCF& SCF::operator=(const SCF& other);
 	~SCF();
 
 	std::string getTarget() const;

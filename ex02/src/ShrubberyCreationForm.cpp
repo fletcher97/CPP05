@@ -57,6 +57,13 @@ SCF::_execute(const Bureaucrat& bureaucrat) const
 	file.close();
 }
 
+SCF&
+SCF::operator=(const SCF& other)
+{
+	AForm::operator=(other);
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& out, const SCF& form)
 {
 	out << "\"" << form.getName();
