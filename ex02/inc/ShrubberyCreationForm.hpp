@@ -9,12 +9,12 @@ class SCF : public AForm
 {
 private:
 	const std::string _target;
+	SCF& SCF::operator=(const SCF& other);
 protected:
 	virtual void _execute(const Bureaucrat& executor) const;
 public:
 	SCF(std::string target);
 	SCF(const SCF& other);
-	SCF& SCF::operator=(const SCF& other);
 	~SCF();
 
 	std::string getTarget() const;
