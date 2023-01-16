@@ -9,6 +9,7 @@ class PPF : public AForm
 {
 private:
 	const std::string _target;
+	PPF& operator=(const PPF& other);
 protected:
 	virtual void _execute(const Bureaucrat& executor) const;
 public:

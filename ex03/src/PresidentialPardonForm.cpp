@@ -24,6 +24,13 @@ PPF::_execute(const Bureaucrat& bureaucrat) const
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
+PPF&
+PPF::operator=(const PPF& other)
+{
+	AForm::operator=(other);
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& out, const PPF& form)
 {
 	out << "\"" << form.getName();

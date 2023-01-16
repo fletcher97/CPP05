@@ -59,6 +59,13 @@ SCF::_execute(const Bureaucrat& bureaucrat) const
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
+SCF&
+SCF::operator=(const SCF& other)
+{
+	AForm::operator=(other);
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& out, const SCF& form)
 {
 	out << "\"" << form.getName();
