@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::GradeTooLowException::GradeTooLowException(std::string msg) : std::range_error(msg)
 {}
