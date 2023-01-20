@@ -9,7 +9,7 @@ class RRF : public AForm
 {
 private:
 	const std::string _target;
-	RRF& RRF::operator=(const RRF& other);
+	RRF& operator=(const RRF& other);
 protected:
 	virtual void _execute(const Bureaucrat& executor) const;
 public:

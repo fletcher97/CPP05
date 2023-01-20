@@ -9,7 +9,7 @@ class SCF : public AForm
 {
 private:
 	const std::string _target;
-	SCF& SCF::operator=(const SCF& other);
+	SCF& operator=(const SCF& other);
 protected:
 	virtual void _execute(const Bureaucrat& executor) const;
 public:
