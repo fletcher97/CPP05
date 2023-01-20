@@ -1,5 +1,5 @@
-#if !defined(FORM_HPP)
-#define FORM_HPP
+#if !defined(AFORM_HPP)
+#define AFORM_HPP
 
 #include <string>
 #include <stdexcept>
@@ -64,4 +64,4 @@ public:
 };
 std::ostream& operator<<(std::ostream& out, const AForm& form);
 
-#endif // FORM_HPP
+#endif // AFORM_HPP
