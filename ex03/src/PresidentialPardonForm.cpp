@@ -8,6 +8,13 @@ PPF::PPF(std::string target) : AForm("PPF_" + target, 25, 5), _target(target)
 PPF::PPF(const PPF& other) : AForm(other), _target(other.getTarget())
 {}
 
+PPF&
+PPF::operator=(const PPF& other)
+{
+	AForm::operator=(other);
+	return *this;
+}
+
 PPF::~PPF()
 {}
 
@@ -22,13 +29,6 @@ PPF::_execute(const Bureaucrat& bureaucrat) const
 {
 	(void) bureaucrat;
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
-}
-
-PPF&
-PPF::operator=(const PPF& other)
-{
-	AForm::operator=(other);
-	return *this;
 }
 
 std::ostream& operator<<(std::ostream& out, const PPF& form)
