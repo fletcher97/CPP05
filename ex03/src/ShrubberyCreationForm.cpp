@@ -23,7 +23,6 @@ SCF::_execute(const Bureaucrat& bureaucrat) const
 {
 	(void) bureaucrat;
 	std::ofstream file;
-	// + "_shrubbery"
 	file.open((this->_target + "_shrubbery").c_str());
 	file <<
 "                                                         .\n\
@@ -56,7 +55,6 @@ SCF::_execute(const Bureaucrat& bureaucrat) const
                           ...;%@@@@@%%:;;;;,..    Gilo97\n";
 	file.flush();
 	file.close();
-	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
 SCF&
